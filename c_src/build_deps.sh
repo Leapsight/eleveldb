@@ -65,19 +65,17 @@ case "$1" in
         ;;
 
     *)
-        export MACOSX_DEPLOYMENT_TARGET=10.8
-
         if [ ! -d snappy-$SNAPPY_VSN ]; then
             tar -xzf snappy-$SNAPPY_VSN.tar.gz
-            (cd snappy-$SNAPPY_VSN && ./configure --disable-shared --prefix=$BASEDIR/system --libdir=$BASEDIR/system/lib --with-pic)
+            (cd snappy-$SNAPPY_VSN && ./configure --prefix=$BASEDIR/system --libdir=$BASEDIR/system/lib --with-pic)
         fi
 
         if [ ! -f system/lib/libsnappy.a ]; then
             (cd snappy-$SNAPPY_VSN && $MAKE && $MAKE install)
         fi
 
-        export CFLAGS="$CFLAGS -I $BASEDIR/system/include"
-        export CXXFLAGS="$CXXFLAGS -I $BASEDIR/system/include"
+        export CFLAGS="$CFLAGS -Wall -O3 -fPIC -I $BASEDIR/system/include"
+        export CXXFLAGS="$CXXFLAGS -Wall -O3 -fPIC -stdlib=libc++ -I $BASEDIR/system/include"
         export LDFLAGS="$LDFLAGS -L$BASEDIR/system/lib"
         export LD_LIBRARY_PATH="$BASEDIR/system/lib:$LD_LIBRARY_PATH"
         export LEVELDB_VSN="$LEVELDB_VSN"
