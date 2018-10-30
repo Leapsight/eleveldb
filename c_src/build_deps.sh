@@ -79,7 +79,7 @@ case "$1" in
         fi
 
         export CFLAGS="$CFLAGS -Wall -O3 -fPIC -I $BASEDIR/system/include"
-        export CXXFLAGS="$CXXFLAGS -Wall -O3 -fPIC -stdlib=libc++ -I $BASEDIR/system/include"
+        export CXXFLAGS="$CXXFLAGS -Wall -O3 -fPIC -I $BASEDIR/system/include"
         export LDFLAGS="$LDFLAGS -L$BASEDIR/system/lib"
         export LD_LIBRARY_PATH="$BASEDIR/system/lib:$LD_LIBRARY_PATH"
         export LEVELDB_VSN="$LEVELDB_VSN"
