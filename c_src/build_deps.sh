@@ -8,6 +8,10 @@ if [ `uname -s` = 'SunOS' -a "${POSIX_SHELL}" != "true" ]; then
 fi
 unset POSIX_SHELL # clear it so if we invoke other scripts, they run as ksh as well
 
+if [ `uname -s` = 'Darwin' ]; then
+    export CXXFLAGS="$CXXFLAGS -stdlib=libc++"
+fi
+
 LEVELDB_VSN=""
 
 SNAPPY_VSN="1.0.4"
